@@ -4,7 +4,7 @@
 This repo is not “just C code.”  
 It’s a spiritual gymnasium for your neurons. Every `printf` is a prayer, every `malloc` a leap of faith.  
 
-## How to run ( if you have Balls to )
+## How to run 
 ```bash
 gcc something.c -o something
 ./something
