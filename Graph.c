@@ -1,15 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typdef struct {
+typedef struct {
     int* neighbours;
     int size;
     int capacity;
 } Node;
 
 Node* initGraph(int num){
-    Node* Graph = malloc(n * sizeof(Node));
-    for (int i = 0; i < n; i++){
+    Node* Graph = malloc(num * sizeof(Node));
+    for (int i = 0; i < num; i++){
         Graph[i].size = 0;
         Graph[i].capacity = 2;
         Graph[i].neighbours = malloc(Graph[i].capacity * sizeof(int));
@@ -19,11 +19,11 @@ Node* initGraph(int num){
 
 void addEdge(Node* Graph, int from, int to){
     // Reallocate Memory if Capacity gets exceeded
-    if (Graph[from].size == Graph.capacity){
+    if (Graph[from].size == Graph[from].capacity){
         Graph[from].capacity *= 2;
         Graph[from].neighbours = realloc(Graph[from].neighbours, Graph[from].capacity * sizeof(int));
     }
-    Graph[from].neighbours[Graph.size++] = to;
+    Graph[from].neighbours[Graph[from].size++] = to;
 }
 
 
@@ -40,11 +40,10 @@ int main(void){
     addEdge(graph, 3, 4);
     addEdge(graph, 3, 5);
     addEdge(graph, 4, 5);
-
+    printf("Hello There :)\n");
     // Free some of that memory boy
-    free(order);
     for (int i = 0; i < n; i++)
-        free(graph[i].neighbors);
+        free(graph[i].neighbours);
     free(graph);
     return 0;
 }
