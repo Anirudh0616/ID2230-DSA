@@ -4,25 +4,25 @@
 typedef struct Heap{
   int* arr;
   int size;
-  int capacity;
+  int cap;
 }heap;
 
-heap* createHeap(int capacity, int* nums);
+heap* createHeap(int cap, int* nums);
 void insertRec(heap* hp, int index);
 void maxHeapify(heap* hp, int index);
 int popMax(heap* hp);
 void insert(heap* h, int data);
 
 // Heap Initializatiion
-heap* createHeap(int capacity, int* nums){
+heap* createHeap(int cap, int* nums){
   heap* new_heap = (heap*)malloc(sizeof(heap));
 
   new_heap->size = 0;
-  new_heap->capacity = capacity;
-  new_heap->arr = (int*)malloc(capacity * sizeof(int));
+  new_heap->cap = cap;
+  new_heap->arr = (int*)malloc(cap * sizeof(int));
 
   int i;
-  for (i = 0; i < capacity; i++){
+  for (i = 0; i < cap; i++){
     new_heap->arr[i] = nums[i];
   }
   new_heap->size = i;
@@ -48,33 +48,61 @@ void insertRec(heap* hp, int index){
   }
 }
 
-void maxHeapify(heap* hp, int index){
-  int left = index * 2 + 1;
-  int right = index * 2 + 2;
-  int max = index;
-
-  if (left >= hp->size || left < 0){
-    left = -1;
-  }
-  if (right >= hp->size || right < 0){
-    right = -1;
-  }
-
-  if (left != -1 && hp->arr[left] > hp->arr[max]){
-    max = left;
-  }
-  if (right != -1 && hp->arr[right] > hp->arr[max]){
-    max = right;
-  }
-
-  if (max != index){
-    int temp = hp->arr[max];
-    hp->arr[max] = hp->arr[index];
-    hp->arr[index] = temp;
-
-    maxHeapify(hp, max);
-  }
+// void maxHeapify(heap* hp, int index){
+//   int left = index * 2 + 1;
+//   int right = index * 2 + 2;
+//   int max = index;
+//
+//   if (left >= hp->size || left < 0){
+//     left = -1;
+//   }
+//   if (right >= hp->size || right < 0){
+//     right = -1;
+//   }
+//
+//   if (left != -1 && hp->arr[left] > hp->arr[max]){
+//     max = left;
+//   }
+//   if (right != -1 && hp->arr[right] > hp->arr[max]){
+//     max = right;
+//   }
+//
+//   if (max != index){
+//     int temp = hp->arr[max];
+//     hp->arr[max] = hp->arr[index];
+//     hp->arr[index] = temp;
+//
+//     maxHeapify(hp, max);
+//   }
+// }
+//
+void maxHeapify(heap*heap,int index){
+    int largest = index;
+    int left = index* 2 + 1;
+    int right = index*2 + 2;
+    
+    if(left < 0 || left >= heap->size){
+        left = -1;
+    }
+    if(right < 0 || right >= heap->size){
+        right = -1;
+    }
+    if(left != -1 && heap->arr[left] > heap->arr[largest]){
+        largest = left;
+    }
+    if(right != -1 && heap->arr[right] > heap->arr[largest]){
+        largest = right;
+    }
+    if(largest != index){
+        int temp = heap->arr[largest];
+        heap->arr[largest] = heap->arr[index];
+        heap->arr[index] = temp;
+        
+        maxHeapify(heap, largest);
+    }
 }
+
+
 
 int popMax(heap* hp){
   int delete;
@@ -94,7 +122,7 @@ int popMax(heap* hp){
 }
 
 void insert(heap* hp, int data){
-  if (hp->size < hp->capacity){
+  if (hp->size < hp->cap){
     hp->arr[hp->size] = data;
     insertRec(hp, hp->size);
     hp->size++;

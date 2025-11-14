@@ -11,7 +11,7 @@ Node* initGraph(int num){
     Node* Graph = malloc(num * sizeof(Node));
     for (int i = 0; i < num; i++){
         Graph[i].size = 0;
-        Graph[i].capacity = 2;
+        Graph[i].capacity = 100;
         Graph[i].neighbours = malloc(Graph[i].capacity * sizeof(int));
     }
     return Graph;
@@ -40,7 +40,17 @@ int main(void){
     addEdge(graph, 3, 4);
     addEdge(graph, 3, 5);
     addEdge(graph, 4, 5);
+    addEdge(graph, 4, 1);
+    addEdge(graph, 4, 3);
     printf("Hello There :)\n");
+
+    for(int i = 0;i<n;i++){
+        for(int j =0;j<n;j++){
+            printf("i = %d,j = %d ||| %d\n",i,j,graph[i].neighbours[j]);
+        }
+    }
+
+
     // Free some of that memory boy
     for (int i = 0; i < n; i++)
         free(graph[i].neighbours);
