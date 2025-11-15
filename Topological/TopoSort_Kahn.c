@@ -66,10 +66,13 @@ int* topoSortKahn(Node* Graph, int n){
 
 
 int main(void){
-    int n = 6;
+    int n = 9;
 
     Node* graph = initGraph(n);
     addEdge(graph, 0, 1);
+    addEdge(graph, 0, 6);
+    addEdge(graph, 0, 7);
+    addEdge(graph, 0, 8);
     addEdge(graph, 1, 2);
     addEdge(graph, 2, 3);
     addEdge(graph, 4, 5);
